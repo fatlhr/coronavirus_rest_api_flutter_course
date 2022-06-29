@@ -26,6 +26,7 @@ class _DashboardState extends State<Dashboard> {
 
   Future<void> _updateData() async {
     try {
+      print('[-----REFRESH-----]');
       final dataRepository =
           Provider.of<DataRepository>(context, listen: false);
       final endpointsData = await dataRepository.getAllEndpointsData();
@@ -37,10 +38,11 @@ class _DashboardState extends State<Dashboard> {
         content: 'Could not retrieve data. Please try again later.',
         defaultActionText: 'OK',
       );
-    } catch (_) {
+    } catch (e) {
+      print(e);
       showAlertDialog(
         context: context,
-        title: 'Unknown Error',
+        title: 'Unknown Error: $e',
         content: 'Please contact support or try again later.',
         defaultActionText: 'OK',
       );
